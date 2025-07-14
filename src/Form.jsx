@@ -9,8 +9,8 @@ const Form = () => {
             User Information
           </h2>
 
-          <div class="flex items-center mb-3">
-            <label for="name" class="w-32 font-bold">
+          <div className="flex items-center mb-3">
+            <label htmlFor="name" className="w-32 font-bold">
               Name:
             </label>
             <input
@@ -18,12 +18,12 @@ const Form = () => {
               id="name"
               name="name"
               required
-              class="flex-1 border rounded px-3 py-2"
+              className="flex-1 border rounded px-3 py-2"
             />
           </div>
 
-          <div class="flex items-center mb-3">
-            <label for="username" class="w-32 font-bold">
+          <div className="flex items-center mb-3">
+            <label htmlFor="username" className="w-32 font-bold">
               Username:
             </label>
             <input
@@ -31,12 +31,12 @@ const Form = () => {
               id="username"
               name="username"
               required
-              class="flex-1 border rounded px-3 py-2"
+              className="flex-1 border rounded px-3 py-2"
             />
           </div>
 
-          <div class="flex items-center mb-3">
-            <label for="email" class="w-32 font-bold">
+          <div className="flex items-center mb-3">
+            <label htmlFor="email" className="w-32 font-bold">
               Email:
             </label>
             <input
@@ -44,93 +44,93 @@ const Form = () => {
               id="email"
               name="email"
               required
-              class="flex-1 border rounded px-3 py-2"
+              className="flex-1 border rounded px-3 py-2"
             />
           </div>
 
-          <div class="flex items-center mb-3">
-            <label for="phone" class="w-32 font-bold">
+          <div className="flex items-center mb-3">
+            <label htmlFor="phone" className="w-32 font-bold">
               Phone No.:
             </label>
             <input
               type="tel"
               id="phone"
               name="phone"
-              class="flex-1 border rounded px-3 py-2"
+              className="flex-1 border rounded px-3 py-2"
             />
           </div>
 
-          <div class="flex items-center mb-3">
-            <label for="website" class="w-32 font-bold">
+          <div className="flex items-center mb-3">
+            <label htmlor="website" className="w-32 font-bold">
               Website:
             </label>
             <input
               type="url"
               id="website"
               name="website"
-              class="flex-1 border rounded px-3 py-2"
+              className="flex-1 border rounded px-3 py-2"
             />
           </div>
 
-          <h3 class="text-lg font-semibold mt-6 mb-2">Address</h3>
+          <h3 className="text-lg font-semibold mt-6 mb-2">Address</h3>
 
-          <div class="flex items-center mb-3">
-            <label for="street" class="w-32 font-bold">
+          <div className="flex items-center mb-3">
+            <label htmlor="street" className="w-32 font-bold">
               Street:
             </label>
             <input
               type="text"
               id="street"
               name="street"
-              class="flex-1 border rounded px-3 py-2"
+              className="flex-1 border rounded px-3 py-2"
             />
           </div>
 
-          <div class="flex items-center mb-3">
-            <label for="suite" class="w-32 font-bold">
+          <div className="flex items-center mb-3">
+            <label htmlFor="suite" className="w-32 font-bold">
               Suite:
             </label>
             <input
               type="text"
               id="suite"
               name="suite"
-              class="flex-1 border rounded px-3 py-2"
+              className="flex-1 border rounded px-3 py-2"
             />
           </div>
 
-          <div class="flex items-center mb-3">
-            <label for="city" class="w-32 font-bold">
+          <div className="flex items-center mb-3">
+            <label htmlFor="city" className="w-32 font-bold">
               City:
             </label>
             <input
               type="text"
               id="city"
               name="city"
-              class="flex-1 border rounded px-3 py-2"
+              className="flex-1 border rounded px-3 py-2"
             />
           </div>
 
-          <div class="flex items-center mb-3">
-            <label for="zipcode" class="w-32 font-bold">
+          <div className="flex items-center mb-3">
+            <label htmlFor="zipcode" className="w-32 font-bold">
               ZipCode:
             </label>
             <input
               type="text"
               id="zipcode"
               name="zipcode"
-              class="flex-1 border rounded px-3 py-2"
+              className="flex-1 border rounded px-3 py-2"
             />
           </div>
 
-          <div class="flex items-center mb-3">
-            <label for="company" class="w-32 font-bold">
+          <div className="flex items-center mb-3">
+            <label htmlFor="company" className="w-32 font-bold">
               Company:
             </label>
             <input
               type="text"
               id="company"
               name="company"
-              class="flex-1 border rounded px-3 py-2"
+              className="flex-1 border rounded px-3 py-2"
             />
           </div>
           <div className="flex justify-center mb-6">

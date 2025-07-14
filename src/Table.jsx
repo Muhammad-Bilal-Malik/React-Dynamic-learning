@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import Modal from "./Modal";
 
 const Table = () => {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [singleUser, setSingleUser] = useState(null);
 
   useEffect(() => {
     fetchData();
@@ -22,15 +24,47 @@ const Table = () => {
     } catch (err) {
       setError(err);
     } finally {
-      setLoading(flase);
+      setLoading(false);
     }
   };
 
   if (error) return <p>Error: {error.message}</p>;
   if (loading) return <p>Loading the page</p>;
 
+  const showRecord = async (userid) => {
+    // console.log("Show Row Data", userid);
+    try {
+      const response = await fetch(
+        `https://jsonplaceholder.typicode.com/users/${userid}`
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! status : ${response.status}`);
+      }
+      const result = await response.json();
+      console.log("mydata", result);
+      setSingleUser(result);
+    } catch (error) {
+      setError(error);
+    } finally {
+      setLoading(false);
+    }
+    stopScroll();
+  };
+
+  const onClose = () => {
+    setSingleUser(null);
+  };
+
+  const stopScroll = () => {
+    if (showRecord) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  };
+
   return (
-    <div className="max-w-1366 mx-auto">
+    <div className="max-w-1366 mx-auto ">
       <div className="py-2.5 my-4 flex justify-center items-center">
         <label htmlFor="">
           Enter ID :
@@ -55,7 +89,11 @@ const Table = () => {
           <tbody>
             {users.map((user, i) => {
               return (
-                <tr key={i}>
+                <tr
+                  className="hover:cursor-pointer"
+                  key={i}
+                  onClick={() => showRecord(user.id)}
+                >
                   <td className="py-1.5 text-left px-2 border-2 text-nowrap">
                     {user.name}
                   </td>
@@ -80,6 +118,12 @@ const Table = () => {
           </tbody>
         </table>
       </div>
+      {singleUser && <Modal userData={singleUser} terminate={onClose} />}
+      {/* {singleUser !== null ? (
+        <Modal userData={singleUser}  />
+      ) : (
+        <p>Not accesable</p>
+      )} */}
     </div>
   );
 };
