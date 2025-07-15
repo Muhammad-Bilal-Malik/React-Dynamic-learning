@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Modal from "./Modal";
-
+import ConfirmDeletModal from "./ConfirmDeletModal";
+import Spinner from "./assets/Spinner.svg";
+import { fetchAllData, handleDeleteRecord, showAllRecord } from "./MyApi";
 const Table = () => {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState();
   const [loading, setLoading] = useState(true);
   const [singleUser, setSingleUser] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [myId, setMyId] = useState(null);
 
   useEffect(() => {
     fetchData();
@@ -13,14 +17,9 @@ const Table = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(
-        "https://jsonplaceholder.typicode.com/users"
-      );
-      if (!response.ok) {
-        throw new Error(`HTTP error! status : ${response.status}`);
-      }
-      const result = await response.json();
-      setUsers(result);
+      const response = await fetchAllData();
+      setUsers(response);
+      console.log("reponse", response);
     } catch (err) {
       setError(err);
     } finally {
@@ -29,20 +28,12 @@ const Table = () => {
   };
 
   if (error) return <p>Error: {error.message}</p>;
-  if (loading) return <p>Loading the page</p>;
+  if (loading) return <img className="absolute top-[]" src={Spinner} alt="" />;
 
   const showRecord = async (userid) => {
-    // console.log("Show Row Data", userid);
     try {
-      const response = await fetch(
-        `https://jsonplaceholder.typicode.com/users/${userid}`
-      );
-      if (!response.ok) {
-        throw new Error(`HTTP error! status : ${response.status}`);
-      }
-      const result = await response.json();
-      console.log("mydata", result);
-      setSingleUser(result);
+      const response = await showAllRecord(userid);
+      setSingleUser(response);
     } catch (error) {
       setError(error);
     } finally {
@@ -53,13 +44,24 @@ const Table = () => {
 
   const onClose = () => {
     setSingleUser(null);
+    document.body.classList.remove("overflow-hidden");
   };
 
   const stopScroll = () => {
     if (showRecord) {
       document.body.classList.add("overflow-hidden");
-    } else {
-      document.body.classList.remove("overflow-hidden");
+    }
+  };
+
+  const handleDelete = async (userid) => {
+    setLoading(true);
+    try {
+      const response = await handleDeleteRecord(userid);
+      setUsers(users.filter((user) => user.id !== userid));
+    } catch (error) {
+      setError(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -84,6 +86,7 @@ const Table = () => {
               <td className="py-1 text-center border">Phone No.</td>
               <td className="py-1 text-center border">Website</td>
               <td className="py-1 text-center border">Company</td>
+              <td className="py-1 text-center border">Action</td>
             </tr>
           </thead>
           <tbody>
@@ -112,18 +115,35 @@ const Table = () => {
                   <td className="py-1.5 text-left px-2 border-2 text-nowrap">
                     {user.company.name}
                   </td>
+                  <td onClick={(e) => e.stopPropagation()}>
+                    <button className="py-1 rounded bg-red-600 px-2 mr-1">
+                      Update
+                    </button>
+                    <button
+                      onClick={() => {
+                        setOpen(true);
+                        setMyId(user.id);
+                      }}
+                      className="py-1 rounded bg-green-700 px-2"
+                    >
+                      Delete
+                    </button>
+                  </td>
                 </tr>
               );
             })}
           </tbody>
         </table>
+
+        {myId && (
+          <ConfirmDeletModal
+            open={open}
+            onClose={() => setOpen(false)}
+            userId={() => handleDelete(myId)}
+          />
+        )}
       </div>
       {singleUser && <Modal userData={singleUser} terminate={onClose} />}
-      {/* {singleUser !== null ? (
-        <Modal userData={singleUser}  />
-      ) : (
-        <p>Not accesable</p>
-      )} */}
     </div>
   );
 };
