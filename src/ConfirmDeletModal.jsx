@@ -1,5 +1,4 @@
-const ConfirmDeletModal = ({ open, onClose, userId }) => {
-  console.log("userid", userId);
+const ConfirmDeletModal = ({ deleteItem, open, onClose, userId }) => {
   return (
     <div
       onClick={onClose}
@@ -19,7 +18,8 @@ const ConfirmDeletModal = ({ open, onClose, userId }) => {
           <div className="flex justify-center mt-3 gap-5 ">
             <button
               onClick={() => {
-                userId();
+                // userId();
+                deleteItem();
                 onClose();
               }}
               className="bg-red-600 hover:bg-red-700 hover:text-gray-300 transition-all rounded px-2 py-1 shadow-md cursor-pointer"

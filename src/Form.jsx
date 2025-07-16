@@ -1,144 +1,146 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { addProduct, updateRecord } from "./ProductApi";
 
-const Form = () => {
+const Form = ({ openForm, frezeScrole, closeForm, addData }) => {
+  console.log("addData", addData);
+  const [myInput, setMyInput] = useState({
+    id: 0,
+    title: "",
+    category: "",
+    price: 0,
+    stock: 0,
+    description: "",
+  });
+  useEffect(() => {
+    if (addData) {
+      setMyInput({
+        id: addData.id,
+        title: addData.title,
+        category: addData.category,
+        price: addData.price,
+        stock: addData.stock,
+        description: addData.description,
+      });
+    }
+  }, [addData]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      if (addData) {
+        const response = await updateRecord(myInput);
+      } else {
+        const { id, ...rest } = myInput;
+        const response = await addProduct(rest);
+      }
+      closeForm();
+    } catch (error) {}
+  };
+
   return (
-    <div className="max-w-[1366px] mt-5">
-      <div className="w-[60%] mx-auto ">
+    <div
+      onClick={closeForm}
+      className="w-screen h-screen top-0 left-0 right-0 bottom-0 fixed bg-[rgba(49,49,49,0.99)] overflow-scroll"
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="w-[60%] mx-auto bg-white px-3.5 rounded  my-2.5"
+      >
         <form action="/submit" method="post">
           <h2 className="font-bold text-3xl text-center py-2">
             User Information
           </h2>
 
           <div className="flex items-center mb-3">
-            <label htmlFor="name" className="w-32 font-bold">
-              Name:
+            <label htmlFor="title" className="w-32 font-bold">
+              Title:
             </label>
             <input
+              onChange={(e) =>
+                setMyInput((prev) => ({ ...prev, title: e.target.value }))
+              }
               type="text"
-              id="name"
-              name="name"
+              value={myInput.title}
+              id="title"
+              name="title"
               required
               className="flex-1 border rounded px-3 py-2"
             />
           </div>
 
           <div className="flex items-center mb-3">
-            <label htmlFor="username" className="w-32 font-bold">
-              Username:
+            <label htmlFor="category" className="w-32 font-bold">
+              Category:
             </label>
             <input
+              onChange={(e) =>
+                setMyInput((prev) => ({ ...prev, category: e.target.value }))
+              }
               type="text"
-              id="username"
-              name="username"
+              value={myInput.category}
+              id="category"
+              name="category"
               required
               className="flex-1 border rounded px-3 py-2"
             />
           </div>
 
           <div className="flex items-center mb-3">
-            <label htmlFor="email" className="w-32 font-bold">
-              Email:
+            <label htmlFor="price" className="w-32 font-bold">
+              Price:
             </label>
             <input
-              type="email"
-              id="email"
-              name="email"
+              onChange={(e) =>
+                setMyInput((prev) => ({ ...prev, price: e.target.value }))
+              }
+              type="number"
+              value={myInput.price}
+              id="price"
+              name="price"
               required
               className="flex-1 border rounded px-3 py-2"
             />
           </div>
 
           <div className="flex items-center mb-3">
-            <label htmlFor="phone" className="w-32 font-bold">
-              Phone No.:
+            <label htmlFor="stock" className="w-32 font-bold">
+              Stock:
             </label>
             <input
-              type="tel"
-              id="phone"
-              name="phone"
+              onChange={(e) =>
+                setMyInput((prev) => ({ ...prev, stock: e.target.value }))
+              }
+              type="number"
+              value={myInput.stock}
+              id="stock"
+              name="stock"
               className="flex-1 border rounded px-3 py-2"
             />
           </div>
-
           <div className="flex items-center mb-3">
-            <label htmlor="website" className="w-32 font-bold">
-              Website:
+            <label htmlFor="description" className="w-32 font-bold">
+              Description:
             </label>
             <input
-              type="url"
-              id="website"
-              name="website"
-              className="flex-1 border rounded px-3 py-2"
-            />
-          </div>
-
-          <h3 className="text-lg font-semibold mt-6 mb-2">Address</h3>
-
-          <div className="flex items-center mb-3">
-            <label htmlor="street" className="w-32 font-bold">
-              Street:
-            </label>
-            <input
+              onChange={(e) =>
+                setMyInput((prev) => ({ ...prev, description: e.target.value }))
+              }
               type="text"
-              id="street"
-              name="street"
+              value={myInput.description}
+              id="description"
+              name="description"
               className="flex-1 border rounded px-3 py-2"
             />
           </div>
 
-          <div className="flex items-center mb-3">
-            <label htmlFor="suite" className="w-32 font-bold">
-              Suite:
-            </label>
-            <input
-              type="text"
-              id="suite"
-              name="suite"
-              className="flex-1 border rounded px-3 py-2"
-            />
-          </div>
-
-          <div className="flex items-center mb-3">
-            <label htmlFor="city" className="w-32 font-bold">
-              City:
-            </label>
-            <input
-              type="text"
-              id="city"
-              name="city"
-              className="flex-1 border rounded px-3 py-2"
-            />
-          </div>
-
-          <div className="flex items-center mb-3">
-            <label htmlFor="zipcode" className="w-32 font-bold">
-              ZipCode:
-            </label>
-            <input
-              type="text"
-              id="zipcode"
-              name="zipcode"
-              className="flex-1 border rounded px-3 py-2"
-            />
-          </div>
-
-          <div className="flex items-center mb-3">
-            <label htmlFor="company" className="w-32 font-bold">
-              Company:
-            </label>
-            <input
-              type="text"
-              id="company"
-              name="company"
-              className="flex-1 border rounded px-3 py-2"
-            />
-          </div>
           <div className="flex justify-center mb-6">
             <button
+              onClick={handleSubmit}
               className="font-semibold text-gray-900 bg-gray-400 hover:bg-gray-500 px-3 py-1.5 rounded"
               type="submit"
             >
-              Submit
+              {addData ? "Update" : "Submit"}
             </button>
           </div>
         </form>

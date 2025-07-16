@@ -1,14 +1,14 @@
 import "./App.css";
 import Form from "./Form";
+import Product from "./Product";
 
 import Table from "./Table";
 
 function App() {
   return (
     <>
-      <Table />
-
-      {/* <Form /> */}
+      {/* <Table /> */}
+      <Product />
     </>
   );
 }
