@@ -47,60 +47,20 @@ const SingleProduct = ({ productData, terminate }) => {
               </tr>
               <tr>
                 <td className="border px-1.5 py-0.5 bg-gray-300 font-bold text-left">
-                  Rating
+                  Stock
                 </td>
                 <td className="border px-1.5 py-0.5 bg-gray-300 text-left text-nowrap">
-                  {productData.rating}
+                  {productData.stock}
                 </td>
               </tr>
+
               <tr>
                 <td className="border px-1.5 py-0.5 bg-gray-300 font-bold text-left">
-                  Brand
+                  Description
                 </td>
                 <td className="border px-1.5 py-0.5 bg-gray-300 text-left text-nowrap">
-                  {productData.brand}
+                  {productData.description}
                 </td>
-              </tr>
-              <tr>
-                <td className="border px-1.5 py-0.5 bg-gray-300 font-bold text-left">
-                  Reviews
-                </td>
-                {productData.reviews.map((review) => {
-                  return (
-                    <div className="text-wrap">
-                      <div>
-                        <td>
-                          <span className="font-bold">rating :</span>
-                          {review.rating}
-                        </td>
-                      </div>
-                      <div>
-                        <td>
-                          <span className="font-bold">Comment :</span>
-                          {review.comment}
-                        </td>
-                      </div>
-                      <div>
-                        <td>
-                          <span className="font-bold">Date :</span>
-                          {review.date}
-                        </td>
-                      </div>
-                      <div>
-                        <td>
-                          <span className="font-bold">Name :</span>
-                          {review.reviewerName}
-                        </td>
-                      </div>
-                      <div>
-                        <td>
-                          <span className="font-bold">Email :</span>
-                          {review.reviewerEmail}
-                        </td>
-                      </div>
-                    </div>
-                  );
-                })}
               </tr>
             </tbody>
           </table>

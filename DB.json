@@ -1,0 +1,30 @@
+{
+  "products": [
+    {
+      "id": "5019",
+      "title": "First Delivery",
+      "category": "Weapons",
+      "price": "258563",
+      "stock": "22",
+      "description": "All guns deliverd on time"
+    },
+    {
+      "id": "2ae9",
+      "fullname": "Muhammad Bilal",
+      "email": "bilalyadali786@gmail.com",
+      "phone": "2030029028",
+      "dob": "2025-07-03",
+      "program": "cs",
+      "studylevel": "grad"
+    },
+    {
+      "id": "ae61",
+      "fullname": "Muhammad Bilal",
+      "email": "bilalyadali786@gmail.com",
+      "phone": "2030029028",
+      "dob": "2025-07-03",
+      "program": "cs",
+      "studylevel": "grad"
+    }
+  ]
+}
