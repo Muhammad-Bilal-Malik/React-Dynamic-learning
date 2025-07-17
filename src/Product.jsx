@@ -25,7 +25,8 @@ const Product = () => {
   const fetchProduct = async () => {
     try {
       const response = await fetchAllProducts();
-      setAllProducts(response.products);
+      console.log("check", response);
+      setAllProducts(response);
     } catch (error) {
       setError(error);
     } finally {
@@ -90,10 +91,8 @@ const Product = () => {
               <td className="py-1 text-center border">Title</td>
               <td className="py-1 text-center border">Category</td>
               <td className="py-1 text-center border">Price</td>
-              <td className="py-1 text-center border">Rating</td>
               <td className="py-1 text-center border">Stock</td>
-              <td className="py-1 text-center border">Tags</td>
-              <td className="py-1 text-center border">Tags</td>
+              <td className="py-1 text-center border">Description</td>
               <td className="py-1 text-center border">Action</td>
             </tr>
           </thead>
@@ -115,25 +114,11 @@ const Product = () => {
                     {item.price}
                   </td>
                   <td className="py-1.5 text-left px-2 border-2 text-nowrap">
-                    {item.rating}
-                  </td>
-                  <td className="py-1.5 text-left px-2 border-2 text-nowrap">
                     {item.stock}
                   </td>
-                  {/* <td className=" flex justify-around border"> */}
-                  {item.tags.map((tag, i) => {
-                    return (
-                      //   <tr key={i}>
-                      <td
-                        key={i}
-                        className="lex justify-around border py-1.5 text-left text-nowrap"
-                      >
-                        {tag}
-                      </td>
-                      //   </tr>
-                    );
-                  })}
-                  {/* </td> */}
+                  <td className="py-1.5 text-left px-2 border-2 text-nowrap">
+                    {item.description}
+                  </td>
                   <td
                     onClick={(e) => e.stopPropagation()}
                     className="text-center cursor-auto"

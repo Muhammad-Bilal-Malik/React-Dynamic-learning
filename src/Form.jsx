@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { addProduct, updateRecord } from "./ProductApi";
 
 const Form = ({ openForm, frezeScrole, closeForm, addData }) => {
-  console.log("addData", addData);
   const [myInput, setMyInput] = useState({
     id: 0,
     title: "",
@@ -26,7 +25,6 @@ const Form = ({ openForm, frezeScrole, closeForm, addData }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       if (addData) {
         const response = await updateRecord(myInput);
